@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="#" />
+
+    <title>FloorSpace Demo</title>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@next/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+
+  </head>
+
+  <body  style="margin:0">
+
+<div id="app">
+  <div>
+    <b-form-group label="Button style checkboxes">
+      <b-form-checkbox-group plain stacked id="checkboxes1" name="flavour1" v-model="selected" :options="options">
+      </b-form-checkbox-group>
+    </b-form-group>
+
+    <hr>
+    <div>Selected: <strong>{{ selected }}</strong></div>
+  </div>
+
+</div>
+</body>
+    <!-- Vue.js + Bootstrap -->
+    <script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+<script >
+// Vue.js components
+window.app = new Vue({
+  el: "#app",
+  
+  data: {
+      selected: [], // Must be an array reference!
+      options: [
+        {text: 'Orange', value: 'orange'},
+        {text: 'Apple', value: 'apple'},
+        {text: 'Pineapple', value: 'pineapple'},
+        {text: 'Grape', value: 'grape'}
+      ]
+  },
+  methods: {
+    init: function() {
+    }, 
+    } 
+});
+</script>

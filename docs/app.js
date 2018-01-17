@@ -6,7 +6,10 @@ var DBURL = 'http://localhost:3000';
 // Vue.js components
 window.app = new Vue({
   el: "#app",
+  
   data: {
+
+    selected: [ ],
     styleIcon: {
       backgroundPosition:0,
       borderRadius:"20px"
@@ -32,7 +35,7 @@ window.app = new Vue({
       var options = {
           env: "Local",
           useADP: false,
-          urn: "f607ee1f-a7f5-05d4-f46a-438ff1ae52a4_f2d/primaryGraphics.f2d"
+          urn: "7c81ddf9-e5c7-acda-962f-189ba09e294d_f2d/primaryGraphics.f2d"
       }
       Autodesk.Viewing.Initializer( options, function() {
           viewer.start(options.urn, options, onSuccess);            
@@ -41,46 +44,35 @@ window.app = new Vue({
           //viewer.loadExtension('Autodesk.Viewing.MarkupsCore').then(function(markupsExt){
            // markup = markupsExt;
           //});
-          //viewer.loadExtension("measure2");
       }
-    },
-
-    onPointClick: function (itemIndex) {
     },
 
     cardClick: function (item) {
       //load measurement
-      viewer.dispatchEvent(new CustomEvent('newData', {'detail': JSON.parse(item.json)}));
+      if (!item.completed) {
+        console.log('remove it')
+        viewer.dispatchEvent(new CustomEvent('removeData', {'detail': item.MarkupID}));
+      } else {
+        console.log('add it')
+        // mark all items with ID from database.  This will be used to remove items and set hover effects
+        Object.keys(item.json).map(i=>item.json[i].id=item.MarkupID);
+        viewer.dispatchEvent(new CustomEvent('newData', {'detail': item.json}));
+      }
     },
 
     loadData: function() {
       fetch(`${DBURL}/allMarkup?approvalid=1`).then(r => r.json()).then( data=> {
           this.Items = data;
+          this.Items.forEach(i => i.json=JSON.parse(i.json));
       })
     }
   },
 
   computed: {
-    sortedUsers() {
+    totalSqrFeet() {
       return this.Items
-        .sort((a, b) => { return b.userID - a.userID;});
+        .filter(i => i.completed )
+        .reduce((acc, val) => acc + val.sqrfoot, 0 );
     },
-    sortedRFIs() {
-      return this.Items
-        .filter((a)=> {return (a.type=="RFI") })
-        .sort((a, b) => { return b.markupId - a.markupId;});
-    }, 
-    sortedHazardWarnings() {
-      return this.Items
-        .filter((a)=> { return ((a.type=="BIMIQ_Hazard") || (a.type=="BIMIQ_Warning"))})
-        .sort((a, b) => { return b.markupId - a.markupId;});
-    },
-    sheetViews() {
-      return [{title:"2D sheet",urn:"wAyDxQGBgsFAgwJChgOCxQJCQwEAwT"},
-              {title:"3D sheet",urn:"dfsAyDxQGBgsFAgwJChgOCxQJCQwEAwT"}];
-    },
-    showAlert() {
-     return this.name.length > 4 ? true : false;
-    }
   }
 })

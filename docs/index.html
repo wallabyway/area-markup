@@ -35,49 +35,25 @@
 </nav>
 
 <div class="sidebar">
+
   <b-tabs>
     <b-tab title="&#xE901;" active>
       <h6>Tab1</h6>
-
-<b-list-group v-for="item in sortedUsers" :key="item.markupId">
-  <b-list-group-item button><b-form-checkbox v-on:change="cardClick(item)" :value="item.ApprovalState">{{item.DisplayName}} ({{item.sqrfoot}} ft&sup2;)</b-form-checkbox></b-list-group-item>
+<b-list-group v-for="item in Items" :key="item.MarkupID">
+  <b-list-group-item button>
+    <input type="checkbox" v-model="item.completed" @change="cardClick(item)"> {{item.DisplayName}} ({{item.sqrfoot}} ft&sup2;)
+  </b-list-group-item>
 </b-list-group>
+<h6> Total: {{totalSqrFeet}} ft&sup2; </h6>
+
 
     </b-tab>
     <b-tab title="&#xE903;">
       <h6>Approval #2</h6>
-      <b-card v-for="item in sortedRFIs" :title="item.title" :key="item.markupId"
-            :img-src="item.url"
-            img-alt="Image"
-            img-top
-            @click="cardClick(item)"            
-            tag="article">
-      <p class="card-text">
-        <i>QUESTION:</i> {{item.question}}<br>
-        <i>ANSWER:</i> {{item.suggestedAnswer}}<br>
-        <i>CREATOR:</i> {{item.creator}}<br>
-        <i>TIME: {{item.dateTime}}</i><br>
-        <i>ID: {{item.markupId}}</i><br>
-      </p>
-    </b-card>
     </b-tab>
 
     <b-tab title="&#xE904;" >
       <h6>Editor</h6>
-      <b-card v-for="item in sortedHazardWarnings" :title="item.title" :key="item.markupId"
-            :img-src="item.url"
-            img-alt="Image"
-            img-top
-            @click="cardClick(item)"                        
-            tag="article">
-      <p class="card-text">
-        <i>DESCRIPTION:</i> {{item.description}}<br>
-        <i>CREATOR:</i> {{item.creator}}<br>
-        <i>TIME: {{item.dateTime}}</i><br>
-        <i>ID: {{item.markupId}}</i><br>
-      </p>
-    </b-card>
-
     </b-tab>
     <b-tab title="&#xE900;" >
       <h6>DWG Versions</h6>

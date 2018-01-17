@@ -172,6 +172,7 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
 
     this.addMeasurement = function(json) {
         _currentMeasurement = _measurementsManager.createMeasurement(json.measurementType);
+        //_currentMeasurement.id = json.id;
         for (var key in json.picks) {
             if (!json.picks[key])
                 delete(json.picks[key])
@@ -187,6 +188,13 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
 
     this.onSwitchMeasurement = function(e) {
         this.loadJson(e.detail);
+    }
+
+    this.onRemoveMeasurement = function(e) {
+        var id = e.detail;
+        console.log('removing id=',id);
+        this.selectMeasurementById(id);
+        //this.clearCurrentMeasurement();        
     }
 
     this.loadJson = function(json) {
@@ -232,9 +240,11 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
  
        this.onMeasurementChangedBinded = this.onMeasurementChanged.bind(this);
        this.onSwitchMeasurementBinded = this.onSwitchMeasurement.bind(this);
+       this.onRemoveMeasurementBinded = this.onRemoveMeasurement.bind(this);
        _viewer.addEventListener(avem.MEASUREMENT_CHANGED_EVENT, this.onMeasurementChangedBinded);
        _viewer.addEventListener(av.CAMERA_CHANGE_EVENT, this.onCameraChange);
        _viewer.addEventListener("newData", this.onSwitchMeasurementBinded);
+       _viewer.addEventListener("removeData", this.onRemoveMeasurementBinded);
     };
 
     this.deactivate = function()
@@ -263,6 +273,7 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
         _viewer.removeEventListener(av.CAMERA_CHANGE_EVENT, this.onCameraChange);
         _viewer.removeEventListener(avem.MEASUREMENT_CHANGED_EVENT, this.onMeasurementChangedBinded);
         _viewer.removeEventListener("newData", this.onSwitchMeasurementBinded);
+        _viewer.removeEventListener("removeData", this.onRemoveMeasurementBinded);
     };
 
     this.update = function()
@@ -522,6 +533,7 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
     };
 
     this.selectMeasurementById = function(measurementId) {
+        console.log(measurementId);
         if (!_currentMeasurement) {
             _currentMeasurement = _measurementsManager.selectMeasurementById(measurementId);
         }

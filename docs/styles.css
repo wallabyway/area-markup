@@ -4,10 +4,6 @@ body { font-family: 'Lato', sans-serif; font-size: 80%}
 #app {position:fixed; z-index: 2; width:250px; height:100%; opacity:0.9;}
 .bd-navbar {background-color: #444444;}
 .sidebar {position:absolute; left:0; top:51px; width:250px; height:93%; background-color:#eee; overflow-y:scroll; border-right: solid 1px lightgray;}
-.card-title {font-size:12pt; margin-bottom:0.5rem;}
-.card-body {padding:0.5rem;}
-.card {position:inherit;}
-.card {border:10px red;}
 .adsk-viewing-viewer {width:79%;right:0;}
 #forgeViewer {z-index:-1;}
 ::-webkit-scrollbar { 
@@ -20,11 +16,6 @@ body { font-family: 'Lato', sans-serif; font-size: 80%}
     position: fixed;
 }
 
-#msg .card {
-    width: 200px;
-    height: 270px;
-    box-shadow: 0px 7px 20px #707070;
-}
 
 #msg .icon {
     width:28px;  height:28px;

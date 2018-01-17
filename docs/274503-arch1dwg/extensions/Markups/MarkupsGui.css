@@ -1,0 +1,18 @@
+
+.adsk-icon-markup:before {
+  content: "a";
+}
+
+.lmv-markup-gui-toolbar {
+  position: absolute;
+  top: 0;
+  margin: 5px 5px;
+}
+
+.lmv-markup-gui-toolbar-content > * {
+  margin: 0 2px;
+}
+
+.lmv-markup-gui-style-options {
+  display: inline-block;
+}
