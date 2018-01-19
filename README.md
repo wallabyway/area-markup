@@ -1,4 +1,10 @@
 # Space Planning with Forge Measure Tool
+
+DEMO: [https://wallabyway.github.io/area-markup/](https://wallabyway.github.io/area-markup/)
+
+VIDEO: [https://player.vimeo.com/video/251750353](https://player.vimeo.com/video/251750353)
+
+
 The Area-measure tool inside Forge Viewer, can be used as a 'space planning' tool with a bit of tweaking.  This POC shows how to persist the Area measurements to JSON and save them as records in MySQL.  It also shows how to retrieve markups from MySQL and display them individually as layers.
 
 
@@ -9,8 +15,7 @@ The Area-measure tool inside Forge Viewer, can be used as a 'space planning' too
 
 Note: The github demo page doesn't connect to a live MySQL database (just a static copy of the data)
 
-<iframe src="https://player.vimeo.com/video/251750353" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
+[![Spaceplanner](VimeoLink.jpg)](https://vimeo.com/251750353 "spacePlanner - Click to Watch!")
 
 
 ## Setup
