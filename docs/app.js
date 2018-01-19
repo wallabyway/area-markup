@@ -64,7 +64,9 @@ window.app = new Vue({
     },
 
     loadData: function() {
-      fetch(`${DBURL}/allMarkup?approvalid=1`).then(r => r.json()).then( data=> {
+      //uncomment this out at activate live MySQL data
+//      fetch(`${DBURL}/allMarkup?approvalid=1`).then(r => r.json()).then( data=> {
+      fetch(`dummydata.json`).then(r => r.json()).then( data=> {
           this.Items = data;
           this.Items.forEach(i => i.json=JSON.parse(i.json));
       })
