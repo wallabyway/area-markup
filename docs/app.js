@@ -47,13 +47,16 @@ window.app = new Vue({
       }
     },
 
+    removeItem: function (item) {
+      this.Items = this.Items.filter( i => {return i.MarkupID != item});
+      //@@@ To Do:  Add api to remove item from MySQL
+    },
+
     cardClick: function (item) {
       //load measurement
       if (!item.completed) {
-        console.log('remove it')
         viewer.dispatchEvent(new CustomEvent('removeData', {'detail': item.MarkupID}));
       } else {
-        console.log('add it')
         // mark all items with ID from database.  This will be used to remove items and set hover effects
         Object.keys(item.json).map(i=>item.json[i].id=item.MarkupID);
         viewer.dispatchEvent(new CustomEvent('newData', {'detail': item.json}));

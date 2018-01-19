@@ -172,7 +172,7 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
 
     this.addMeasurement = function(json) {
         _currentMeasurement = _measurementsManager.createMeasurement(json.measurementType);
-        //_currentMeasurement.id = json.id;
+        _currentMeasurement.MarkupID = json.id;
         for (var key in json.picks) {
             if (!json.picks[key])
                 delete(json.picks[key])
@@ -191,10 +191,12 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
     }
 
     this.onRemoveMeasurement = function(e) {
-        var id = e.detail;
-        console.log('removing id=',id);
-        this.selectMeasurementById(id);
-        //this.clearCurrentMeasurement();        
+        var MarkupID = e.detail;
+        //var item = _measurementsManager.measurementsList.filter(i=>{return i.MarkupID=MarkupID});
+        var item = _measurementsManager.measurementsList[Object.keys(_measurementsManager.measurementsList).filter(i=>{return _measurementsManager.measurementsList[i].MarkupID==MarkupID})];
+        console.log('removing MarkupID / itemid',MarkupID, item.id);
+        this.selectMeasurementById(item.id);
+        this.clearCurrentMeasurement();        
     }
 
     this.loadJson = function(json) {

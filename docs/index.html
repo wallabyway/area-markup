@@ -38,13 +38,14 @@
 
   <b-tabs>
     <b-tab title="&#xE901;" active>
-      <h6>Tab1</h6>
 <b-list-group v-for="item in Items" :key="item.MarkupID">
   <b-list-group-item button>
     <input type="checkbox" v-model="item.completed" @change="cardClick(item)"> {{item.DisplayName}} ({{item.sqrfoot}} ft&sup2;)
+    <b-button size="sm" class="float-right close" @click="removeItem(item.MarkupID)">&times;</b-button>
   </b-list-group-item>
 </b-list-group>
-<h6> Total: {{totalSqrFeet}} ft&sup2; </h6>
+      <h6 class="float-right col-md-7">Total: {{totalSqrFeet}} ft&sup2;</h6>
+
 
 
     </b-tab>
