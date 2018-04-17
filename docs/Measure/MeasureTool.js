@@ -160,11 +160,20 @@ Autodesk.Viewing.Extensions.Measure.MeasureTool = function( viewer, options, sha
     this.addPick = function(inp) {
         var json = JSON.parse(JSON.stringify(inp));
         var p = _currentMeasurement.setPick(json.id, new Autodesk.Viewing.Extensions.Measure.SnapResult())
+
+        if (json.geomEdge) {
+            p.geomEdge = new THREE.Geometry();
+            var a = json.geomEdge.data.vertices;
+            p.geomEdge.vertices.push( new THREE.Vector3( a[0],a[1],a[2]) );
+            p.geomEdge.vertices.push( new THREE.Vector3( a[3],a[4],a[5]) );
+        }
+        if (json.geomVertex)
+            p.geomVertex = new THREE.Vector3(json.geomVertex.x,json.geomVertex.y,json.geomVertex.z);
+
         Object.assign(p, {
             geomType:json.geomType,
             fromTopology:false,
             viewportIndex2d:json.viewportIndex2d,
-            geomVertex: new THREE.Vector3(json.geomVertex.x,json.geomVertex.y,json.geomVertex.z),
             intersectPoint: new THREE.Vector3(json.intersectPoint.x,json.intersectPoint.y,json.intersectPoint.z),
             radius:json.radius
         });

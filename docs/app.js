@@ -8,20 +8,6 @@ window.app = new Vue({
   el: "#app",
   
   data: {
-
-    selected: [ ],
-    styleIcon: {
-      backgroundPosition:0,
-      borderRadius:"20px"
-    },
-    name: '',
-    item: {
-      title:"myTitle",
-      description:"myDesc",
-      markupId:0,
-      type:0,
-    },
-    itemIsVisible:false,
     Items: [ { title: 'loading...', url:"" }]
   },
   methods: {
