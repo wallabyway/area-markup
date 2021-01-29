@@ -4,7 +4,31 @@ DEMO: [https://wallabyway.github.io/area-markup/](https://wallabyway.github.io/a
 
 VIDEO: [https://player.vimeo.com/video/251750353](https://player.vimeo.com/video/251750353)
 
+UPDATE to v7:
+some pointers: 
 
+- raw source code of measure Tool extension js: https://github.com/wallabyway/forge-markup-measure-extensions
+- API reference: https://forge.autodesk.com/en/docs/viewer/v7/reference/Extensions/MeasureExtension/#getmeasurementlist-unittype-precision
+- changing to measure tool on startup:  `viewer.getExtension('Autodesk.Measure').activate('angle');`
+
+#### Changing Labels:
+
+Here is the code where label text is set:  https://github.com/wallabyway/forge-markup-measure-extensions/blob/c5cd4114dd7a95dabd1e47c868a7f4cba85c4b96/Measure/MeasureToolIndicator.js#L1[…]007
+
+``` 
+setValueMeasurementLabelText(this.areaLabel.label, "~ " + this.measureTool.getArea(this.measurement));
+
+...
+
+// Receives an object created with createMeasurementLabel()
+    function setValueMeasurementLabelText(label, strValue) {
+        if (!label) return;
+        var div = label.querySelector('.measure-length-text');
+        div && (div.textContent = strValue);
+    }
+```
+
+### Intro
 The Area-measure tool inside Forge Viewer, can be used as a 'space planning' tool with a bit of tweaking.  This POC shows how to persist the Area measurements to JSON and save them as records in MySQL.  It also shows how to retrieve markups from MySQL and display them individually as layers.
 
 
